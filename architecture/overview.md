@@ -43,13 +43,13 @@ External media storage:
 ## Networking
 
 Home LAN:
-- Network: `10.0.0.0/24`
+- Network: `10.0.x.x`
 - Gateway: `10.0.0.1`
-- Server reservation: `10.0.0.167`
+- Server reservation: `10.x.x.x`
 
 Remote access:
 - Tailscale
-- Server Tailscale IP: `100.66.6.30`
+- Server Tailscale IP: `100.x.x.x`
 
 Administration:
 - SSH over LAN
