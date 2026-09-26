@@ -1,7 +1,3 @@
-
-## `knowledge-base/service-ports.md`
-
-```markdown
 # Service Ports
 
 | Service | Protocol | Port | Purpose |
@@ -14,9 +10,17 @@
 | Stirling PDF | TCP | 8081 | Self-hosted PDF tools |
 | Jellyfin | TCP | 8096 | Media server web interface |
 
-## Local Access
+These are the ports recorded for this lab, including its configured web UI ports.
 
-Services are accessed through the server LAN address:
+## Access
 
-```text
-10.0.0.167
+Replace `<SERVER_LAN_IP>` with the server's LAN address. For remote access, connect through Tailscale and use `<SERVER_TAILSCALE_IP>`.
+
+| Web interface | LAN URL |
+|---|---|
+| Uptime Kuma | `http://<SERVER_LAN_IP>:3001` |
+| AdGuard Home | `http://<SERVER_LAN_IP>:8080` |
+| Stirling PDF | `http://<SERVER_LAN_IP>:8081` |
+| Jellyfin | `http://<SERVER_LAN_IP>:8096` |
+
+See [SSH access](ssh-access.md) for administration commands.
