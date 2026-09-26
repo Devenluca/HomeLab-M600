@@ -60,7 +60,7 @@ flowchart TD
 
     Internet --> Router
 
-    Router --> LAN["Home LAN 10.0.0.0/24"]
+    Router --> LAN["Home LAN"]
 
     LAN --> Server["Lenovo ThinkCentre M600\nUbuntu Server"]
 
@@ -78,3 +78,24 @@ flowchart TD
     Server --> Samba
     Server --> SSH
     Server --> Media["2 TB External Media Storage"]
+```
+
+## Documentation
+
+- [Architecture and storage](architecture/overview.md)
+- [SSH access and health checks](knowledge-base/ssh-access.md)
+- [Service ports](knowledge-base/service-ports.md)
+- [Jellyfin restart incident](incidents/jellyfin-restart-incident.md)
+- [Work completed and next steps](changes/progress.md)
+
+## Documented Services
+
+Docker hosts Jellyfin, AdGuard Home, Uptime Kuma, and Stirling PDF. Samba, OpenSSH, and Tailscale run as host services. Application data is organized under `/srv/docker`; the external media drive is mounted at `/srv/media` using its filesystem UUID in `/etc/fstab`.
+
+Uptime Kuma monitoring covers Jellyfin, AdGuard Home, SSH, Samba, and Uptime Kuma itself. SSH uses key authentication, with password authentication disabled after key access was verified.
+
+## Project Status
+
+This repository records the setup described in the project notes; it is not a live health report. Backups and restore testing, expanded monitoring, and further service hardening remain goals. Deployment files and screenshots have not yet been added. The Jellyfin incident still needs its root cause and resolution recorded.
+
+Example addresses and usernames are placeholders. Substitute your own values when following the access notes.
