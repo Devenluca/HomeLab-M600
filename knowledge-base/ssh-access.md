@@ -1,51 +1,54 @@
-
-## `knowledge-base/ssh-access.md`
-
-```markdown
 # SSH Access
 
-## Purpose
-
-SSH is used to administer the Ubuntu Server remotely without requiring a local monitor or keyboard.
+SSH is used to administer the Ubuntu Server remotely without a local monitor or keyboard.
 
 ## Local Network Access
 
-From a Mac on the home network:
+Replace the uppercase placeholders with your server username and address.
 
 ```bash
-ssh darrien@10.0.0.167
+ssh <USERNAME>@<SERVER_LAN_IP>
+```
 
-Remote Access with Tailscale
-When away from home:
+## Remote Access with Tailscale
 
-ssh darrien@100.66.6.30
+Connect the client to your Tailscale network before using the server's Tailscale address.
 
-Authentication
-SSH uses an Ed25519 key pair.
-The private key remains on the client device.
-The public key is stored on the server in:
+```bash
+ssh <USERNAME>@<SERVER_TAILSCALE_IP>
+```
 
-~/.ssh/authorized_keys
+## Authentication
 
-Password-based SSH login was disabled after key authentication was verified.
-Quick Health Check
+SSH uses an Ed25519 key pair. The private key remains on the client device; the public key is stored in the server user's `~/.ssh/authorized_keys`. Password-based SSH login was disabled after key authentication was verified.
+
+## Quick Health Check
+
 After connecting:
 
+```bash
 hostname
 docker ps
 df -h
+```
 
-These commands verify:
-- correct host
-- running containers
-- mounted storage and disk usage
+These commands show the host name, running containers, and mounted filesystem usage.
 
-Disconnect
-Exit
+## Disconnect
 
-Useful Troubleshooting Commands
+```bash
+exit
+```
+
+## Troubleshooting Commands
+
+Run these on the server to inspect SSH, listening ports, Tailscale, and network interfaces:
+
+```bash
 systemctl status ssh
-ss -lntp | grep 22
+ss -lntp
 tailscale status
 ip addr
+```
 
+Check for port 22 in the listening-port output. See [service ports](service-ports.md) for the other documented services.
