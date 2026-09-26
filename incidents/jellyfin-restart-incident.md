@@ -27,3 +27,8 @@ docker ps -a | grep jellyfin
 
 cd /srv/docker/jellyfin
 docker compose ps
+```
+
+## Outcome and Evidence Gaps
+
+The original note describes the interruption as temporary, but does not include command output, the confirmed root cause, the recovery action, or a successful follow-up check. Those details remain unconfirmed. The possible causes above are hypotheses, not findings.
