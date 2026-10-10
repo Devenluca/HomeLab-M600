@@ -86,6 +86,7 @@ flowchart TD
 - [SSH access and health checks](knowledge-base/ssh-access.md)
 - [Service ports](knowledge-base/service-ports.md)
 - [Jellyfin restart incident](incidents/jellyfin-restart-incident.md)
+- [MacBook DNS resolution failure (administration client)](incidents/macbook-dns-resolution-failure.md)
 - [Work completed and next steps](changes/progress.md)
 
 ## Documented Services
