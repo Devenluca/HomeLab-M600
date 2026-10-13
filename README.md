@@ -87,6 +87,7 @@ flowchart TD
 - [Service ports](knowledge-base/service-ports.md)
 - [Jellyfin restart incident](incidents/jellyfin-restart-incident.md)
 - [MacBook DNS resolution failure (administration client)](incidents/macbook-dns-resolution-failure.md)
+- [Backup and restore workflow](changes/backup-system.md)
 - [Work completed and next steps](changes/progress.md)
 
 ## Documented Services
@@ -97,6 +98,16 @@ Uptime Kuma monitoring covers Jellyfin, AdGuard Home, SSH, Samba, and Uptime Kum
 
 ## Project Status
 
-This repository records the setup described in the project notes; it is not a live health report. Backups and restore testing, expanded monitoring, and further service hardening remain goals. Deployment files and screenshots have not yet been added. The Jellyfin incident still needs its root cause and resolution recorded.
+This repository records the setup described in the project notes; it is not a live health report. Configuration backup and isolated restore testing are completed as documented below; broader recovery testing, expanded monitoring, and further service hardening remain goals. Deployment files and screenshots have not yet been added. The Jellyfin incident still needs its root cause and resolution recorded.
 
 Example addresses and usernames are placeholders. Substitute your own values when following the access notes.
+
+## Backup and recovery evidence
+
+Docker application data under `/srv/docker` and selected host configuration were manually backed up to `/srv/media/.server-backups/manual/` on a separate physical disk. Archive contents were checked, SHA-256 verification succeeded, and the archive was extracted into `/srv/restore-test` without overwriting production. Tested restored Compose files matched production using `diff`.
+
+The backup script and systemd service/timer are configured for nightly `02:00` backups with `Persistent=true`, checksums, logging, and removal of daily backup files older than seven days. Supplied terminal evidence at `2026-10-13T00:49:45+00:00` shows a completed scripted backup in the daily directory, all four services running afterward, and the timer enabled and waiting. An unattended overnight run has not been demonstrated.
+
+Media is excluded. Backups are on a different disk but are not yet off-site/off-host disaster-recovery backups. Full host rebuild/bare-metal recovery, application data recovery, and LVM snapshot rollback remain untested; LVM rollback is future work.
+
+See [backup and restore workflow](changes/backup-system.md) and [progress](changes/progress.md) for protected paths, verification scope, limitations, and remaining work.
